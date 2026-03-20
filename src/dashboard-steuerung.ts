@@ -268,7 +268,7 @@ export class DashboardSteuerungAnwendung {
     if (!konfiguration) {
       if (hatteVorherKonfiguration) {
         this.setzeBedienhinweis(
-          "Die gespeicherte SIP-Konfiguration ist nicht mehr vollstaendig. Bitte die Hauptanwendung erneut verbinden."
+          "Die gespeicherte SIP-Konfiguration ist nicht mehr vollstaendig. Bitte die Add-on-Konfiguration pruefen."
         );
       } else {
         this.fordereKonfigurationAusAnderenTabsAn();
@@ -299,7 +299,7 @@ export class DashboardSteuerungAnwendung {
 
     if (!konfiguration) {
       const hinweis =
-        "Es wurde noch keine gespeicherte SIP-Konfiguration gefunden. Bitte die Hauptanwendung zuerst ueber https://localhost:5173 oeffnen und dort verbinden.";
+        "Es wurde keine vollstaendige SIP-Konfiguration gefunden. Bitte die Add-on-Optionen bzw. die Laufzeitkonfiguration pruefen.";
       this.setzeBedienhinweis(hinweis);
       this.protokolliere(hinweis);
       return false;
@@ -336,7 +336,7 @@ export class DashboardSteuerungAnwendung {
   private async starteAutomatischeVerbindung(): Promise<void> {
     if (!this.aktualisiereKonfigurationsstatus()) {
       this.setzeBedienhinweis(
-        "Es wurde noch keine vollstaendige SIP-Konfiguration gefunden. Dashboard fragt die Hauptanwendung nach den Daten."
+        "Es wurde noch keine vollstaendige SIP-Konfiguration gefunden. Dashboard prueft auf Daten aus der Add-on-Laufzeitkonfiguration oder aus einem anderen App-Tab."
       );
       this.protokolliere("Automatische SIP-Verbindung uebersprungen, weil keine gespeicherte Konfiguration vorhanden ist.");
       this.fordereKonfigurationAusAnderenTabsAn();

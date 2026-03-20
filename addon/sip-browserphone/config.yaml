@@ -1,5 +1,5 @@
 name: SIP Browserphone
-version: "1.0.0"
+version: "1.0.1"
 slug: sip_browserphone
 description: Browserbasiertes SIP-Softphone mit Dashboard-Steuerung fuer Home Assistant
 startup: application

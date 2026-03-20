@@ -77,21 +77,22 @@ Home Assistant dokumentiert fuer Dashboards die `Webpage card` mit `allow`-Attri
 Die Dashboard-Seite deiner App liegt innerhalb des Add-ons unter:
 
 ```text
-dashboard-steuerung.html
+/dashboard
 ```
 
 Wichtig:
 
 - Die Ingress-Basis-URL wird von Home Assistant erzeugt.
 - Sie ist nicht einfach eine feste lokale URL wie `/local/...`.
-- Deshalb muss zuerst die Add-on-Weboberflaeche einmal ueber `Open Web UI` geoeffnet werden.
+- Deshalb muss die Add-on-Weboberflaeche mindestens einmal ueber `Open Web UI` geoeffnet werden, um die aktuelle Ingress-Basis-URL bequem zu ermitteln.
+- Fuer die SIP-Konfiguration selbst ist dieses vorherige Oeffnen nicht mehr noetig; die Dashboard-Seite nutzt im Add-on-Betrieb direkt die erzeugte Laufzeit-Konfiguration.
 
 ## 6. Ingress-Basis-URL ermitteln
 
 1. Im Add-on auf `Open Web UI` klicken.
 2. Die im Browser geoeffnete Add-on-URL kopieren.
 3. Diese URL ist die Basis der Hauptanwendung.
-4. Fuer die Dashboard-Steuerung einfach `dashboard-steuerung.html` daran anhaengen.
+4. Fuer die Dashboard-Steuerung einfach `/dashboard` daran anhaengen.
 
 Beispiel:
 
@@ -104,19 +105,20 @@ https://ha-kunde.example.com/api/hassio_ingress/abc123def456/
 dann ist die Dashboard-URL:
 
 ```text
-https://ha-kunde.example.com/api/hassio_ingress/abc123def456/dashboard-steuerung.html
+https://ha-kunde.example.com/api/hassio_ingress/abc123def456/dashboard
 ```
 
 Optional mit Zielnummer:
 
 ```text
-https://ha-kunde.example.com/api/hassio_ingress/abc123def456/dashboard-steuerung.html?ziel=200
+https://ha-kunde.example.com/api/hassio_ingress/abc123def456/dashboard?ziel=200
 ```
 
 Hinweis:
 
 - Der genaue Ingress-Pfad wird von Home Assistant verwaltet.
 - Falls sich dieser Pfad nach Updates oder neuer Anmeldung aendert, muss die Dashboard-URL erneut geprueft werden.
+- Falls du den aktuellen Ingress-Pfad pruefen willst, liefert `.../ingress-info` ein JSON mit `ingress_path` und `dashboard_pfad`.
 
 ## 7. Lovelace-Webpage-Card
 
@@ -132,7 +134,7 @@ Beispiel fuer die Karte:
 ```yaml
 type: iframe
 title: SIP Dashboard
-url: https://ha-kunde.example.com/api/hassio_ingress/abc123def456/dashboard-steuerung.html?ziel=200
+url: https://ha-kunde.example.com/api/hassio_ingress/abc123def456/dashboard?ziel=200
 aspect_ratio: 35%
 allow: microphone; autoplay
 ```
@@ -141,7 +143,7 @@ Wenn die Darstellung moeglichst kompakt sein soll:
 
 ```yaml
 type: iframe
-url: https://ha-kunde.example.com/api/hassio_ingress/abc123def456/dashboard-steuerung.html?ziel=200
+url: https://ha-kunde.example.com/api/hassio_ingress/abc123def456/dashboard?ziel=200
 aspect_ratio: 25%
 allow: microphone; autoplay
 hide_background: true

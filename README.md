@@ -119,11 +119,11 @@ Diese Seite zeigt nur:
 - `Auflegen`
 - die Gespraechsdauer
 
-Die Seite verwendet die in der Hauptanwendung bereits gespeicherte SIP-Konfiguration und verbindet sich nach dem Laden automatisch mit Asterisk.
+Die Seite verwendet im Add-on-Betrieb direkt die erzeugte Laufzeit-Konfiguration und verbindet sich nach dem Laden automatisch mit Asterisk.
 
 Wichtig:
 
-- Die SIP-Daten muessen vorher mindestens einmal in der Hauptanwendung gespeichert worden sein.
+- Im Home-Assistant-Add-on reichen die gesetzten Add-on-Optionen aus; ein vorheriges Oeffnen der Hauptanwendung ist fuer die Dashboard-Seite nicht mehr noetig.
 - Die Standard-Rufnummer kann ueber die Laufzeit-Konfiguration bzw. im Home-Assistant-Add-on ueber die Option `dashboard_target` vorgegeben werden.
 - Optional kann die Rufnummer auch direkt ueber die URL gesetzt werden, zum Beispiel `dashboard-steuerung.html?ziel=200`.
 
@@ -172,6 +172,8 @@ Verhalten:
 - das Add-on erzeugt beim Start automatisch eine `runtime-konfiguration.json` aus den Add-on-Optionen
 - die Webanwendung uebernimmt diese Konfiguration beim Laden automatisch
 - die Dashboard-Steuerung nutzt ebenfalls diese Laufzeit-Konfiguration
+- zusaetzlich steht innerhalb des Ingress nun der sprechende Endpunkt `/dashboard` fuer die kompakte Dashboard-Steuerung bereit
+- ueber `/ingress-info` kann der aktuell von Home Assistant vergebene Ingress-Pfad als JSON abgerufen werden
 
 Typischer Ablauf fuer einen Kundeneinsatz:
 
@@ -183,6 +185,12 @@ Typischer Ablauf fuer einen Kundeneinsatz:
 6. Add-on starten
 7. Hauptoberflaeche ueber den Add-on-Menuepunkt oeffnen
 8. die Dashboard-Steuerung ueber dieselbe Add-on-/Ingress-Instanz verwenden
+
+Beispiel innerhalb von Home Assistant:
+
+```text
+https://ha-kunde.example.com/api/hassio_ingress/abc123def456/dashboard?ziel=200
+```
 
 Wichtiger Hinweis:
 
